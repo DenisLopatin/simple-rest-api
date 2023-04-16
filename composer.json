@@ -1,0 +1,19 @@
+{
+    "name": "denis-lopatin/simple-rest-api",
+    "description": "A simple REST API created in PHP",
+    "autoload": {
+        "psr-4": {
+            "Database\\": "src/database"
+        }
+    },
+    "authors": [
+        {
+            "name": "Denis",
+            "email": "www.denis-lopatin@yandex.ru"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+        "illuminate/database": "^10.7"
+    }
+}
