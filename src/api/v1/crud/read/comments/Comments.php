@@ -9,13 +9,13 @@ class Comments extends CRUD
     {
         $response = $this->database::table('comments')->get();
         $data = [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $data;
+        return $this->recordRelatedRoutes($data, 'comments');
     }
 
     public final function getCommentByID(int $commentID): array
     {
         $response = $this->database::table('comments')->where('id', '=', $commentID)->get();
         $data = [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $data;
+        return $this->recordRelatedRoutes($data, 'comments');
     }
 }

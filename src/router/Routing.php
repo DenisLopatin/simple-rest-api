@@ -18,17 +18,13 @@ final class Routing
         Router::add('GET', '/v1/user/:id/posts', [new Users($this->database), 'getUserPostsByUserID']);
         Router::add('GET', '/v1/user/:id/comments', [new Users($this->database), 'getUserCommentsByUserID']);
         Router::add('GET', '/v1/user/:id/todos', [new Users($this->database), 'getUserTodosByUserID']);
-
         Router::add('GET', '/v1/posts', [new Posts($this->database), 'getAllPosts']);
         Router::add('GET', '/v1/post/:id', [new Posts($this->database), 'getPostByID']);
         Router::add('GET', '/v1/post/:id/comments', [new Posts($this->database), 'getPostCommentsByPostID']);
-
         Router::add('GET', '/v1/comments', [new Comments($this->database), 'getAllComments']);
         Router::add('GET', '/v1/comments/:id', [new Comments($this->database), 'getCommentByID']);
-
         Router::add('GET', '/v1/todos', [new Todos($this->database), 'getAllTodos']);
         Router::add('GET', '/v1/todo/:id', [new Todos($this->database), 'getTodoByID']);
-
         Router::add('GET', '.+', [new Users($this->database), 'get']);
     }
 }

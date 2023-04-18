@@ -9,20 +9,20 @@ final class Posts extends CRUD
     {
         $response = $this->database::table('posts')->get();
         $data = [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $data;
+        return $this->recordRelatedRoutes($data, 'posts');
     }
 
     public final function getPostByID(int $postID): array
     {
         $response = $this->database::table('posts')->where('id', '=', $postID)->get();
         $data = [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $data;
+        return $this->recordRelatedRoutes($data, 'posts');
     }
 
     public final function getPostCommentsByPostID(int $postID): array
     {
         $response = $this->database::table('comments')->where('post_id', '=', $postID)->get();
         $data = [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $data;
+        return $this->recordRelatedRoutes($data, 'posts');
     }
 }

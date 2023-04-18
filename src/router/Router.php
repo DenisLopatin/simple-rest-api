@@ -27,7 +27,9 @@ final class Router
                     };
                 }
 
-                return self::$routes[$method][$route];
+                return function () use ($method, $route) {
+                    return self::$routes[$method][$route]();
+                };
             }
         }
 

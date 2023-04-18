@@ -12,30 +12,35 @@ abstract class CRUD
         return [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
     }
 
-    protected final function setResponse(array $data, string $table): array
+    protected final function recordRelatedRoutes(array $data, string $table): array
     {
         switch ($table) {
             case 'users':
                 $data['related'] = [
                     'get all users' => '/v1/users',
-                    'get user by id' => '/v1/user/[id]',
-                    'get user by id with query' => '/v1/user?id=[id]',
-                    'get users by id' => '/v1/users?id=[id,id...]',
-                    'get user by name' => '/v1/users?name=[name]',
-                    'get user by surname' => '/v1/users?surname=[surname]',
-                    'get user by password' => '/v1/users?password=[password]',
-                    'get user by email' => '/v1/users?email=[email]',
+                    'get user by id' => '/v1/user/:id',
+                    'get user\'s posts' => '/v1/user/:id/posts',
+                    'get user\'s comments' => '/v1/user/:id/comments',
+                    'get user\'s todos' => '/v1/user/:id/todos',
+                ];
+                return $data;
+            case 'posts':
+                $data['related'] = [
+                    'get all posts' => '/v1/posts',
+                    'get post by id' => '/v1/post/:id',
+                    'get comments of post' => '/v1/post/:id/comments',
+                ];
+                return $data;
+            case 'comments':
+                $data['related'] = [
+                    'get all comments' => '/v1/comments',
+                    'get comment by id' => '/v1/comment/:id',
                 ];
                 return $data;
             case 'todos':
                 $data['related'] = [
                     'get all todo' => '/v1/todos',
-                    'get todo by id' => '/v1/todo/[id]',
-                    'get todo by id with query' => '/v1/todo?id=[id]',
-                    'get todos by id' => '/v1/todos?id=[id,id...]',
-                    'get todo by user_id' => '/v1/todos?user_id=[user_id]',
-                    'get todo by search' => '/v1/todos?todo=[todo]',
-                    'combined' => '/v1/todos?id=[id]&user_id=[user_id]'
+                    'get todo by id' => '/v1/todo/:id',
                 ];
                 return $data;
             default:
