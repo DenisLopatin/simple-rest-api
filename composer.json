@@ -19,6 +19,6 @@
     "require": {
         "vlucas/phpdotenv": "^5.5",
         "illuminate/database": "^10.7",
-        "ext-http": "*"
+        "symfony/cache": "^6.2"
     }
 }
