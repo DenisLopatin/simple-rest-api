@@ -6,7 +6,7 @@ use Exception;
 
 final class RequestHandler
 {
-    public function processRequest(): void
+    public final function processRequest(): void
     {
         try {
             $executor = Router::get($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

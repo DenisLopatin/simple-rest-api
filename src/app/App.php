@@ -6,9 +6,9 @@ use Database\migrate\Migrate;
 use Database\migrate\data\MigrateData;
 use Database\migrate\tables\MigrateTables;
 use Illuminate\Database\Capsule\Manager;
-use Exception;
 use Processing\RequestHandler;
 use Router\Routing;
+use Exception;
 
 final class App
 {

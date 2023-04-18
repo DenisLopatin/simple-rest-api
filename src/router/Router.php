@@ -1,20 +1,20 @@
 <?php
 
 namespace Router;
-use Exception;
+use Closure;
 
 final class Router
 {
     private static array $routes = [ 'GET' => [], 'POST' => [], 'UPDATE' => [], 'PATCH' => [] ];
 
-    public static function add(string $method, string $path, callable $function): bool
+    public static final function add(string $method, string $path, callable $function): bool
     {
         $path = '#^' . str_replace(':id', '\d+', $path) . '/?$#';
         self::$routes[$method][$path] = $function;
         return true;
     }
 
-    public static function get(string $method, string $path): mixed
+    public static final function get(string $method, string $path): Closure
     {
         foreach (self::$routes[$method] as $route => $callable) {
             if (preg_match($route, $path)) {
@@ -36,7 +36,7 @@ final class Router
         };
     }
 
-    public static function remove(string $method, string $path): bool
+    public static final function remove(string $method, string $path): bool
     {
         if (isset(self::$routes[$method][$path])) {
             unset(self::$routes[$method][$path]);

@@ -1,9 +1,17 @@
 <?php
 
 namespace Crud;
+use Illuminate\Database\Capsule\Manager;
 
 abstract class CRUD
 {
+    public function __construct(protected readonly Manager $database) {}
+
+    public final function get(): array
+    {
+        return [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
+    }
+
     protected final function setResponse(array $data, string $table): array
     {
         switch ($table) {

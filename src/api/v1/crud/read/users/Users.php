@@ -1,17 +1,10 @@
 <?php
 
 namespace Crud\read\users;
-use Illuminate\Database\Capsule\Manager;
+use Crud\CRUD;
 
-class Users
+class Users extends CRUD
 {
-    public function __construct(private readonly Manager $database) {}
-
-    public final function get(): array
-    {
-        return [ 'status' => 200, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
-    }
-
     public final function getAllUsers(): array
     {
         $response = $this->database::table('users')->get();
