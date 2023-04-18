@@ -81,7 +81,7 @@ final class MigrateData implements DataMigratory
         ];
     }
 
-    public function fillTodosTable(): array
+    public final function fillTodosTable(): array
     {
         return [
             [
@@ -337,7 +337,7 @@ final class MigrateData implements DataMigratory
         ];
     }
 
-    public function fillPostsTable(): array
+    public final function fillPostsTable(): array
     {
 
         return [
@@ -791,7 +791,7 @@ final class MigrateData implements DataMigratory
         ];
     }
 
-    public function fillCommentsTable(): array
+    public final function fillCommentsTable(): array
     {
         return  [
             [

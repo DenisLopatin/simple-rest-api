@@ -1,12 +1,13 @@
 <?php
 
 namespace Database\migrate;
+use Database\migrate\contract\Migratory;
 use Database\migrate\data\contract\DataMigratory;
 use Database\migrate\tables\contract\TablesMigratory;
 use Illuminate\Database\Capsule\Manager;
 use Exception;
 
-final class Migrate
+final class Migrate implements Migratory
 {
     public function __construct(
         private readonly Manager $databaseManager,
@@ -37,7 +38,7 @@ final class Migrate
                 $this->databaseManager::table('comments')->insert($this->data->fillCommentsTable());
             }
         } catch (Exception $error) {
-            exit('Ошибка инициализации базы данных: ' . $error->getMessage());
+            exit('Database initialization error: ' . $error->getMessage());
         }
     }
 

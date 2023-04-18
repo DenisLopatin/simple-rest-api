@@ -1,9 +1,10 @@
 <?php
 
 namespace Database;
+use Database\contract\RemoteStorage;
 use Illuminate\Database\Capsule\Manager;
 
-class Database
+final class Database implements RemoteStorage
 {
     public function __construct(
         private readonly string $driver,

@@ -3,7 +3,11 @@
     "description": "A simple REST API created in PHP",
     "autoload": {
         "psr-4": {
-            "Database\\": "src/database"
+            "App\\": "src/app",
+            "Database\\": "src/database",
+            "Processing\\": "src/processing",
+            "Crud\\": "src/api/v1/crud",
+            "Router\\": "src/router"
         }
     },
     "authors": [
@@ -14,6 +18,7 @@
     ],
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "illuminate/database": "^10.7"
+        "illuminate/database": "^10.7",
+        "ext-http": "*"
     }
 }

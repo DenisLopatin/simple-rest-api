@@ -1,15 +1,16 @@
 <?php
 
-use Database\Database;
-use Database\migrate\Migrate;
-use Database\migrate\data\MigrateData;
-use Database\migrate\tables\MigrateTables;
-use Illuminate\Database\Capsule\Manager;
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Max-Age: 86400');
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Request-Method: GET, POST, PUT, DELETE, OPTIONS');
+//$request_body = json_decode(file_get_contents('php://input'), true);
+use App\App;
 
 require_once 'vendor/autoload.php';
 require_once 'src/config/index.php';
+require_once 'src/messages/messages.php';
 
-$database = new Database(DB_DRIVER, DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT, DB_CHARSET);
-$database_manager = $database->connect(new Manager());
-$migrate = new Migrate($database_manager, new MigrateTables(), new MigrateData());
-$migrate->migrate();
+$app = new App();
+$app->init();
