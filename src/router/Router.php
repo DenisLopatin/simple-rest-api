@@ -18,7 +18,6 @@ final class Router
     {
         foreach (self::$routes[$method] as $route => $callable) {
             if (preg_match($route, $path)) {
-
                 if (preg_match("#/(?<id>\d+)#", $path, $matches)) {
                     $id = $matches['id'];
 
@@ -34,7 +33,8 @@ final class Router
         }
 
         return function () {
-            return [ 'status' => 400, 'message' => CANNOT_FIND_ROUTER, 'data' => [] ];
+            http_response_code(STATUS_DATA_NOT_FOUND);
+            return [ 'ok' => false, 'status' => STATUS_DATA_NOT_FOUND, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         };
     }
 

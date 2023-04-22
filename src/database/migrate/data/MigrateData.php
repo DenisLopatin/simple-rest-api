@@ -19,14 +19,14 @@ final class MigrateData implements DataMigratory
                 'id' => 2,
                 'name' => 'William',
                 'surname' => 'Johnson',
-                'password' => 'Ann12Lo3#',
+                'password' => 'Wil12Lo3#',
                 'email' => 'www.william-johnson@mail.com'
             ],
             [
                 'id' => 3,
                 'name' => 'Emma',
                 'surname' => 'Garcia',
-                'password' => 'Mark1092T@',
+                'password' => 'Em1092T@',
                 'email' => 'www.emma-garcia@mail.com'
             ],
             [
@@ -47,7 +47,7 @@ final class MigrateData implements DataMigratory
                 'id' => 6,
                 'name' => 'Ethan',
                 'surname' => 'Kim',
-                'password' => 'black_0891^',
+                'password' => 'etk_0891^',
                 'email' => 'www.ethan-kim@mail.com'
             ],
             [
@@ -61,21 +61,21 @@ final class MigrateData implements DataMigratory
                 'id' => 8,
                 'name' => 'Jacob',
                 'surname' => 'Gonzalez',
-                'password' => 'kat1088(',
+                'password' => 'ka1088(',
                 'email' => 'www.jacob-gonzalez@mail.com'
             ],
             [
                 'id' => 9,
                 'name' => 'Isabella',
                 'surname' => 'Kim',
-                'password' => 'ivan4559987)',
+                'password' => 'ioq4559987)',
                 'email' => 'www.isabella-kim@mail.com'
             ],
             [
                 'id' => 10,
                 'name' => 'David',
                 'surname' => 'Lee',
-                'password' => 'ksenia_0820_',
+                'password' => 'lee_0820_',
                 'email' => 'www.david-lee@mail.com'
             ]
         ];

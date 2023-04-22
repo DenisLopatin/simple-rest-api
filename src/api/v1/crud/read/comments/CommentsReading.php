@@ -1,21 +1,22 @@
 <?php
 
 namespace Crud\read\comments;
-use Crud\CRUD;
+use Crud\REST;
+use Illuminate\Database\Capsule\Manager;
 
-class CommentsReading extends CRUD
+final class CommentsReading extends REST
 {
-    public final function getAllComments(): array
+    public static final function getComments(): array
     {
-        $response = $this->database::table('comments')->get();
+        $response = Manager::table('comments')->get();
         $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'comments');
+        return self::setCommentsHateoas($data);
     }
 
-    public final function getCommentByID(int $commentID): array
+    public static final function getCommentByID(int $commentID): array
     {
-        $response = $this->database::table('comments')->where('id', '=', $commentID)->get();
+        $response = Manager::table('comments')->where('id', '=', $commentID)->get();
         $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'comments');
+        return self::setCommentHateoas($data);
     }
 }

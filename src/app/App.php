@@ -13,13 +13,13 @@ use Exception;
 
 final class App
 {
-    public final function init(): void
+    public static final function init(): void
     {
         try {
             $database_config = [DB_DRIVER, DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT, DB_CHARSET];
-            $database = (new Database(...$database_config))->connect(new Manager());
-            $migrate = new Migrate($database, new MigrateTables(), new MigrateData());
-            $routing = new Routing($database);
+            (new Database(...$database_config))->connect(new Manager());
+            $migrate = new Migrate(new MigrateTables(), new MigrateData());
+            $routing = new Routing();
             $requestHandler = new RequestHandler(new FilesystemAdapter(CACHE_FOLDER, CACHE_TIME, CACHE_DIRECTORY));
 
             $migrate->migrate();

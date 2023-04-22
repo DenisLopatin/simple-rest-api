@@ -1,42 +1,43 @@
 <?php
 
 namespace Crud\read\users;
-use Crud\CRUD;
+use Crud\REST;
+use Illuminate\Database\Capsule\Manager as DatabaseManager;
 
-class UsersReading extends CRUD
+final class UsersReading extends REST
 {
-    public final function getAllUsers(): array
+    public static final function getUsers(): array
     {
-        $response = $this->database::table('users')->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'users');
+        $response = DatabaseManager::table('users')->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setUsersHateoas($data);
     }
 
-    public final function getUserByID(int $userID): array
+    public static final function getUserByID(int $userID): array
     {
-        $response = $this->database::table('users')->where('id', '=', $userID)->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'users');
+        $response = DatabaseManager::table('users')->where('id', '=', $userID)->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setUserHateoas($data);
     }
 
-    public final function getUserPostsByUserID(int $userID): array
+    public static final function getUserPostsByUserID(int $userID): array
     {
-        $response = $this->database::table('posts')->where('user_id', '=', $userID)->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'users');
+        $response = DatabaseManager::table('posts')->where('user_id', '=', $userID)->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setUserPostsHateoas($data);
     }
 
-    public final function getUserCommentsByUserID(int $userID): array
+    public static final function getUserCommentsByUserID(int $userID): array
     {
-        $response = $this->database::table('comments')->where('user_id', '=', $userID)->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'users');
+        $response = DatabaseManager::table('comments')->where('user_id', '=', $userID)->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setUserCommentsHateoas($data);
     }
 
-    public final function getUserTodosByUserID(int $userID): array
+    public static final function getUserTodosByUserID(int $userID): array
     {
-        $response = $this->database::table('todos')->where('user_id', '=', $userID)->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'users');
+        $response = DatabaseManager::table('todos')->where('user_id', '=', $userID)->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setUserTodosHateoas($data);
     }
 }

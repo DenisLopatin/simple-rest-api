@@ -1,28 +1,29 @@
 <?php
 
 namespace Crud\read\posts;
-use Crud\CRUD;
+use Crud\REST;
+use Illuminate\Database\Capsule\Manager;
 
-final class PostsReading extends CRUD
+final class PostsReading extends REST
 {
-    public final function getAllPosts(): array
+    public static final function getPosts(): array
     {
-        $response = $this->database::table('posts')->get();
+        $response = Manager::table('posts')->get();
         $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'posts');
+        return self::setPostsHateoas($data);
     }
 
-    public final function getPostByID(int $postID): array
+    public static final function getPostByID(int $postID): array
     {
-        $response = $this->database::table('posts')->where('id', '=', $postID)->get();
+        $response = Manager::table('posts')->where('id', '=', $postID)->get();
         $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'posts');
+        return self::setPostHateoas($data);
     }
 
-    public final function getPostCommentsByPostID(int $postID): array
+    public static final function getPostCommentsByPostID(int $postID): array
     {
-        $response = $this->database::table('comments')->where('post_id', '=', $postID)->get();
+        $response = Manager::table('comments')->where('post_id', '=', $postID)->get();
         $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'posts');
+        return self::setPostCommentsHateoas($data);
     }
 }

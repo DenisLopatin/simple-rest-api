@@ -15,6 +15,7 @@ final class MigrateTables implements TablesMigratory
             $users->string('password');
             $users->string('email')->unique();
             $users->timestamp('created_at')->useCurrent();
+            $users->timestamp('updated_at')->useCurrent();;
         };
     }
 
@@ -25,6 +26,7 @@ final class MigrateTables implements TablesMigratory
             $todos->integer('user_id')->unsigned();
             $todos->string('todo');
             $todos->timestamp('created_at')->useCurrent();
+            $todos->timestamp('updated_at')->useCurrent();;
             $todos->foreign('user_id')->references('id')->on('users');
         };
     }
@@ -37,6 +39,7 @@ final class MigrateTables implements TablesMigratory
             $posts->string('heading');
             $posts->text('article');
             $posts->timestamp('created_at')->useCurrent();
+            $posts->timestamp('updated_at')->useCurrent();;
             $posts->foreign('user_id')->references('id')->on('users');
         };
     }
@@ -49,6 +52,7 @@ final class MigrateTables implements TablesMigratory
             $comments->integer('post_id')->unsigned();
             $comments->string('comment');
             $comments->timestamp('created_at')->useCurrent();
+            $comments->timestamp('updated_at')->useCurrent();;
             $comments->foreign('user_id')->references('id')->on('users');
             $comments->foreign('post_id')->references('id')->on('posts');
         };

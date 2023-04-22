@@ -1,21 +1,22 @@
 <?php
 
 namespace Crud\read\todos;
-use Crud\CRUD;
+use Crud\REST;
+use Illuminate\Database\Capsule\Manager;
 
-final class TodosReading extends CRUD
+final class TodosReading extends REST
 {
-    public final function getAllTodos(): array
+    public static final function getTodos(): array
     {
-        $response = $this->database::table('todos')->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'todos');
+        $response = Manager::table('todos')->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setTodosHateoas($data);
     }
 
-    public final function getTodoByID(int $todoID): array
+    public static final function getTodoByID(int $todoID): array
     {
-        $response = $this->database::table('todos')->where('id', '=', $todoID)->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return $this->recordRelatedRoutes($data, 'todos');
+        $response = Manager::table('todos')->where('id', '=', $todoID)->get();
+        $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+        return self::setTodoHateoas($data);
     }
 }
