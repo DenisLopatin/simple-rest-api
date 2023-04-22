@@ -5,7 +5,7 @@ use Crud\REST;
 use Exception;
 use Illuminate\Database\Capsule\Manager;
 
-final class TodosDeleting
+final class TodosDeleting extends REST
 {
     public static final function deleteTodo(): array
     {

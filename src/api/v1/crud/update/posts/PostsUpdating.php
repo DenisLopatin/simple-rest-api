@@ -1,0 +1,21 @@
+<?php
+
+namespace Crud\update\posts;
+use Crud\REST;
+use Exception;
+use Illuminate\Database\Capsule\Manager;
+
+final class PostsUpdating extends REST
+{
+    public static final function updatePost(): array
+    {
+        try {
+            $body_request = json_decode(file_get_contents('php://input'), true);;
+            Manager::table('posts')->where('id', '=', $body_request)->update($body_request);
+            $post = Manager::table('posts')->where('id', '=', $body_request)->get();
+            return [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $post ];
+        } catch (Exception $error) {
+            return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
+        }
+    }
+}
