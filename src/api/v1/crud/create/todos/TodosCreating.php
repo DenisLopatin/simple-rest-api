@@ -1,6 +1,9 @@
 <?php
 
 namespace Crud\create\todos;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use Crud\REST;
 use Exception;
 use Illuminate\Database\Capsule\Manager;
@@ -15,6 +18,9 @@ final class TodosCreating extends REST
             $todo = Manager::table('todos')->select()->where('id', '=', $todo_id)->get();
             return [ 'ok' => true, 'status' => STATUS_CREATED, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $todo ];
         } catch (Exception $error) {
+            $log = new Logger('create todo');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

@@ -1,10 +1,12 @@
 <?php
 
 namespace Crud\update\todos;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use Crud\REST;
 use Exception;
 use Illuminate\Database\Capsule\Manager;
-use Illuminate\Support\Facades\Date;
 
 final class TodosUpdating extends REST
 {
@@ -17,6 +19,9 @@ final class TodosUpdating extends REST
             $todo = Manager::table('todos')->where('id', '=', $body_request)->get();
             return [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $todo ];
         } catch (Exception $error) {
+            $log = new Logger('update todo');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

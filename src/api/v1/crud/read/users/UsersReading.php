@@ -1,6 +1,9 @@
 <?php
 
 namespace Crud\read\users;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use Crud\REST;
 use Exception;
 use Illuminate\Database\Capsule\Manager;
@@ -14,6 +17,9 @@ final class UsersReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setUsersHateoas($data);
         } catch (Exception $error) {
+            $log = new Logger('get users');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -25,6 +31,9 @@ final class UsersReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setUserHateoas($data);
         } catch (Exception $error) {
+            $log = new Logger('get user by id');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -36,6 +45,9 @@ final class UsersReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setUserPostsHateoas($data);
         } catch (Exception $error) {
+            $log = new Logger('get user posts');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -47,6 +59,9 @@ final class UsersReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setUserCommentsHateoas($data);
         } catch (Exception $error) {
+            $log = new Logger('get user comments');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -58,6 +73,9 @@ final class UsersReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setUserTodosHateoas($data);
         } catch (Exception $error) {
+            $log = new Logger('get user todos');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

@@ -1,6 +1,9 @@
 <?php
 
 namespace Processing;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Router\Router;
 use Exception;
@@ -24,6 +27,9 @@ final class RequestHandler
 
             exit(json_encode($response));
         } catch (Exception $error) {
+            $log = new Logger('process request');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             exit('Request processing error');
         }
     }

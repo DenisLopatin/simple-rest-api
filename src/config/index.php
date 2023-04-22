@@ -7,3 +7,4 @@ $dotenv->load();
 
 require_once 'db.config.php';
 require_once 'cache.config.php';
+require_once 'log.config.php';

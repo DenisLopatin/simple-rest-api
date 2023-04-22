@@ -1,6 +1,9 @@
 <?php
 
 namespace App;
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 use Database\Database;
 use Database\migrate\Migrate;
 use Database\migrate\data\MigrateData;
@@ -26,6 +29,9 @@ final class App
             $routing->bind();
             $requestHandler->processRequest();
         } catch (Exception $error) {
+            $log = new Logger('initialize app');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             exit('Application initialization error');
         }
     }

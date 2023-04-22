@@ -1,6 +1,9 @@
 <?php
 
 namespace Crud\update\users;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use Crud\REST;
 use Exception;
 use Illuminate\Database\Capsule\Manager;
@@ -16,6 +19,9 @@ final class UsersUpdating extends REST
             $user = Manager::table('users')->where('id', '=', $body_request)->get();
             return [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $user ];
         } catch (Exception $error) {
+            $log = new Logger('update user');
+            $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
+            $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
