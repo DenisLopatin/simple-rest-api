@@ -1,11 +1,14 @@
 <?php
 
 namespace Router;
+use Crud\create\comments\CommentsCreating;
+use Crud\create\posts\PostsCreating;
+use Crud\create\todos\TodosCreating;
 use Crud\create\users\UsersCreating;
-use Crud\read\users\UsersReading;
 use Crud\read\comments\CommentsReading;
 use Crud\read\posts\PostsReading;
 use Crud\read\todos\TodosReading;
+use Crud\read\users\UsersReading;
 
 final class Routing
 {
@@ -26,6 +29,9 @@ final class Routing
         Router::add('GET', '/api/v1/todos', [TodosReading::class, 'getTodos']);
         Router::add('GET', '/api/v1/todo/:id', [TodosReading::class, 'getTodoByID']);
 
-//        Router::add('POST', '/v1/user', [new UsersCreating($this->database), 'createUser']);
+        Router::add('POST', '/api/v1/user', [UsersCreating::class, 'createUser']);
+        Router::add('POST', '/api/v1/post', [PostsCreating::class, 'createPost']);
+        Router::add('POST', '/api/v1/comment', [CommentsCreating::class, 'createComment']);
+        Router::add('POST', '/api/v1/todo', [TodosCreating::class, 'createTodo']);
     }
 }

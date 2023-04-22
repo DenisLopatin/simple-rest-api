@@ -1,7 +1,6 @@
 <?php
 
 namespace Crud;
-use Illuminate\Database\Capsule\Manager;
 
 abstract class REST
 {

@@ -2,21 +2,30 @@
 
 namespace Crud\read\comments;
 use Crud\REST;
+use Exception;
 use Illuminate\Database\Capsule\Manager;
 
 final class CommentsReading extends REST
 {
     public static final function getComments(): array
     {
-        $response = Manager::table('comments')->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return self::setCommentsHateoas($data);
+        try {
+            $response = Manager::table('comments')->get();
+            $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+            return self::setCommentsHateoas($data);
+        } catch (Exception $error) {
+            return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
+        }
     }
 
     public static final function getCommentByID(int $commentID): array
     {
-        $response = Manager::table('comments')->where('id', '=', $commentID)->get();
-        $data = [ 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
-        return self::setCommentHateoas($data);
+        try {
+            $response = Manager::table('comments')->where('id', '=', $commentID)->get();
+            $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+            return self::setCommentHateoas($data);
+        } catch (Exception $error) {
+            return [ 'ok' => false, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => [] ];
+        }
     }
 }
