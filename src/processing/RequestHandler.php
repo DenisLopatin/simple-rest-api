@@ -24,7 +24,7 @@ final class RequestHandler
 
             exit(json_encode($response));
         } catch (Exception $error) {
-            exit('Request processing error: ' . $error->getMessage());
+            exit('Request processing error');
         }
     }
 }

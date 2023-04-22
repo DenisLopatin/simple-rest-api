@@ -26,7 +26,7 @@ final class App
             $routing->bind();
             $requestHandler->processRequest();
         } catch (Exception $error) {
-            exit('Application initialization error: ' . $error->getMessage());
+            exit('Application initialization error');
         }
     }
 }
