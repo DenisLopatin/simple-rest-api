@@ -17,7 +17,7 @@ final class PostsReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setPostsHateoas($data);
         } catch (Exception $error) {
-            $log = new Logger('get posts');
+            $log = new Logger('v1 get posts');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];

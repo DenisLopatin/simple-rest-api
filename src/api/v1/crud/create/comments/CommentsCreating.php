@@ -18,7 +18,7 @@ final class CommentsCreating extends REST
             $comment = Manager::table('comments')->select()->where('id', '=', $comment_id)->get();
             return [ 'ok' => true, 'status' => STATUS_CREATED, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $comment ];
         } catch (Exception $error) {
-            $log = new Logger('create comment');
+            $log = new Logger('v1 create comment');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];

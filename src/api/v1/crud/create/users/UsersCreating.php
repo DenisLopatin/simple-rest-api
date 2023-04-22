@@ -18,7 +18,7 @@ final class UsersCreating extends REST
             $user = Manager::table('users')->where('id', '=', $user_id)->get();
             return [ 'ok' => true, 'status' => STATUS_CREATED, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $user ];
         } catch (Exception $error) {
-            $log = new Logger('create user');
+            $log = new Logger('v1 create user');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];

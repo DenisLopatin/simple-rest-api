@@ -17,7 +17,7 @@ final class TodosReading extends REST
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
             return self::setTodosHateoas($data);
         } catch (Exception $error) {
-            $log = new Logger('get todos');
+            $log = new Logger('v1 get todos');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];

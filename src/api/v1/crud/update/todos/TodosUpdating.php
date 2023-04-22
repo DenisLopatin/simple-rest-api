@@ -19,7 +19,7 @@ final class TodosUpdating extends REST
             $todo = Manager::table('todos')->where('id', '=', $body_request)->get();
             return [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $todo ];
         } catch (Exception $error) {
-            $log = new Logger('update todo');
+            $log = new Logger('v1 update todo');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];

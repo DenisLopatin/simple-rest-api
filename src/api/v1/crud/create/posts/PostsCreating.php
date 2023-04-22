@@ -18,7 +18,7 @@ final class PostsCreating extends REST
             $post = Manager::table('posts')->select()->where('id', '=', $post_id)->get();
             return [ 'ok' => true, 'status' => STATUS_CREATED, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $post ];
         } catch (Exception $error) {
-            $log = new Logger('create post');
+            $log = new Logger('v1 create post');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
