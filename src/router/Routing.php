@@ -2,13 +2,17 @@
 
 namespace Router;
 use Crud\create\comments\CommentsCreating;
-use Crud\create\posts\PostsCreating;
-use Crud\create\todos\TodosCreating;
-use Crud\create\users\UsersCreating;
+use Crud\delete\comments\CommentsDeleting;
 use Crud\read\comments\CommentsReading;
-use Crud\read\posts\PostsReading;
-use Crud\read\todos\TodosReading;
+use Crud\create\users\UsersCreating;
+use Crud\delete\users\UsersDeleting;
 use Crud\read\users\UsersReading;
+use Crud\read\todos\TodosReading;
+use Crud\create\todos\TodosCreating;
+use Crud\delete\todos\TodosDeleting;
+use Crud\create\posts\PostsCreating;
+use Crud\delete\posts\PostsDeleting;
+use Crud\read\posts\PostsReading;
 
 final class Routing
 {
@@ -33,5 +37,10 @@ final class Routing
         Router::add('POST', '/api/v1/post', [PostsCreating::class, 'createPost']);
         Router::add('POST', '/api/v1/comment', [CommentsCreating::class, 'createComment']);
         Router::add('POST', '/api/v1/todo', [TodosCreating::class, 'createTodo']);
+
+        Router::add('DELETE', '/api/v1/user', [UsersDeleting::class, 'deleteUser']);
+        Router::add('DELETE', '/api/v1/post', [PostsDeleting::class, 'deletePost']);
+        Router::add('DELETE', '/api/v1/comment', [CommentsDeleting::class, 'deleteComment']);
+        Router::add('DELETE', '/api/v1/todo', [TodosDeleting::class, 'deleteTodo']);
     }
 }

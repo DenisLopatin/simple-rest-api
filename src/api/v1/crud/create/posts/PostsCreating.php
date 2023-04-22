@@ -5,7 +5,7 @@ use Illuminate\Database\Capsule\Manager;
 use Crud\REST;
 use Exception;
 
-class PostsCreating extends REST
+final class PostsCreating extends REST
 {
     public static final function createPost(): array
     {

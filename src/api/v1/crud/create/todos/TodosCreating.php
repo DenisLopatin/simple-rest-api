@@ -5,7 +5,7 @@ use Crud\REST;
 use Exception;
 use Illuminate\Database\Capsule\Manager;
 
-class TodosCreating extends REST
+final class TodosCreating extends REST
 {
     public static final function createTodo(): array
     {

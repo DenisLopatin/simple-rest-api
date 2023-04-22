@@ -5,7 +5,7 @@ use Illuminate\Database\Capsule\Manager;
 use Crud\REST;
 use Exception;
 
-class CommentsCreating extends REST
+final class CommentsCreating extends REST
 {
     public static final function createComment(): array
     {
