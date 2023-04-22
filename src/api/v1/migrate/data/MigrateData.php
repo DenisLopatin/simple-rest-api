@@ -1,7 +1,7 @@
 <?php
 
-namespace Database\migrate\data;
-use Database\migrate\data\contract\DataMigratory;
+namespace MigrateV1\data;
+use MigrateV1\data\contract\DataMigratory;
 
 final class MigrateData implements DataMigratory
 {

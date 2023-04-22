@@ -1,7 +1,7 @@
 <?php
 
-namespace Database\migrate\tables;
-use Database\migrate\tables\contract\TablesMigratory;
+namespace MigrateV1\tables;
+use MigrateV1\tables\contract\TablesMigratory;
 use Closure;
 
 final class MigrateTables implements TablesMigratory

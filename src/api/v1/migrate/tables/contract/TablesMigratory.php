@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\migrate\tables\contract;
+namespace MigrateV1\tables\contract;
 use Closure;
 
 interface TablesMigratory

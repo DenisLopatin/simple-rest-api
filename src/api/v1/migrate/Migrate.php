@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\migrate;
+namespace MigrateV1;
+use MigrateV1\contract\Migratory;
+use MigrateV1\data\contract\DataMigratory;
+use MigrateV1\tables\contract\TablesMigratory;
 use Illuminate\Database\Capsule\Manager;
-use Database\migrate\contract\Migratory;
-use Database\migrate\data\contract\DataMigratory;
-use Database\migrate\tables\contract\TablesMigratory;
 use Exception;
 
 final class Migrate implements Migratory

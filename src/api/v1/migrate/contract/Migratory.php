@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\migrate\contract;
+namespace MigrateV1\contract;
 
 interface Migratory
 {
