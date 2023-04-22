@@ -30,6 +30,8 @@ final class RequestHandler
             $log = new Logger('process request');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(SERVER_ERROR);
             exit('Request processing error');
         }
     }

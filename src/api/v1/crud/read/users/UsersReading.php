@@ -15,11 +15,15 @@ final class UsersReading extends REST
         try {
             $response = Manager::table('users')->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setUsersHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('v1 get users');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -29,11 +33,15 @@ final class UsersReading extends REST
         try {
             $response = Manager::table('users')->where('id', '=', $userID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setUserHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get user by id');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -43,11 +51,15 @@ final class UsersReading extends REST
         try {
             $response = Manager::table('posts')->where('user_id', '=', $userID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setUserPostsHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get user posts');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -57,11 +69,15 @@ final class UsersReading extends REST
         try {
             $response = Manager::table('comments')->where('user_id', '=', $userID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setUserCommentsHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get user comments');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -71,11 +87,15 @@ final class UsersReading extends REST
         try {
             $response = Manager::table('todos')->where('user_id', '=', $userID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setUserTodosHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get user todos');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

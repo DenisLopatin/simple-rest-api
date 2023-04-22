@@ -15,11 +15,15 @@ final class PostsReading extends REST
         try {
             $response = Manager::table('posts')->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setPostsHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('v1 get posts');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -29,11 +33,15 @@ final class PostsReading extends REST
         try {
             $response = Manager::table('posts')->where('id', '=', $postID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setPostHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get post by id');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -43,11 +51,15 @@ final class PostsReading extends REST
         try {
             $response = Manager::table('comments')->where('post_id', '=', $postID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setPostCommentsHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get post comments');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

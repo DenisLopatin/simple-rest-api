@@ -16,11 +16,15 @@ final class TodosDeleting extends REST
             $body_request = json_decode(file_get_contents('php://input'), true);
             $todo = Manager::table('todos')->where('id', '=', $body_request)->get();
             Manager::table('todos')->delete($body_request);
+
+            http_response_code(STATUS_DATA_REMOVED);
             return [ 'ok' => true, 'status' => STATUS_DATA_REMOVED, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $todo ];
         } catch (Exception $error) {
             $log = new Logger('v1 delete todo');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

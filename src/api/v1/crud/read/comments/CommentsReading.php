@@ -15,11 +15,15 @@ final class CommentsReading extends REST
         try {
             $response = Manager::table('comments')->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setCommentsHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('v1 get comments');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
@@ -29,12 +33,16 @@ final class CommentsReading extends REST
         try {
             $response = Manager::table('comments')->where('id', '=', $commentID)->get();
             $data = [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $response ];
+
+            http_response_code(STATUS_OK);
             return self::setCommentHateoas($data);
         } catch (Exception $error) {
             $log = new Logger('get comment by id');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
-            return [ 'ok' => false, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => [] ];
+
+            http_response_code(STATUS_BAD_REQUEST);
+            return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => [] ];
         }
     }
 }

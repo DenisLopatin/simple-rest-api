@@ -17,11 +17,15 @@ final class CommentsUpdating extends REST
             $body_request['updated_at'] = date('Y-m-d H:i:s', time());
             Manager::table('comments')->where('id', '=', $body_request)->update($body_request);
             $comment = Manager::table('comments')->where('id', '=', $body_request)->get();
+
+            http_response_code(STATUS_OK);
             return [ 'ok' => true, 'status' => STATUS_OK, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $comment ];
         } catch (Exception $error) {
             $log = new Logger('v1 update comment');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }

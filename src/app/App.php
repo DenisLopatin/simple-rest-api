@@ -32,6 +32,8 @@ final class App
             $log = new Logger('initialize app');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(SERVER_ERROR);
             exit('Application initialization error');
         }
     }

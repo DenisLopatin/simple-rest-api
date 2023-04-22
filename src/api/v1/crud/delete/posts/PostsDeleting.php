@@ -16,11 +16,15 @@ final class PostsDeleting extends REST
             $body_request = json_decode(file_get_contents('php://input'), true);
             $post = Manager::table('posts')->where('id', '=', $body_request)->get();
             Manager::table('posts')->delete($body_request);
+
+            http_response_code(STATUS_DATA_REMOVED);
             return [ 'ok' => true, 'status' => STATUS_DATA_REMOVED, 'message' => REQUEST_HAS_BEEN_FULFILLED, 'data' => $post ];
         } catch (Exception $error) {
             $log = new Logger('v1 delete post');
             $log->pushHandler(new StreamHandler(LOG_FOLDER, Level::Warning));
             $log->error($error);
+
+            http_response_code(STATUS_BAD_REQUEST);
             return [ 'ok' => false, 'status' => STATUS_BAD_REQUEST, 'message' => REQUEST_HAS_BEEN_FAILED, 'data' => [] ];
         }
     }
