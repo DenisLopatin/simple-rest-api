@@ -6,7 +6,8 @@ A simple REST API is written in PHP.
 
 ### Dependencies
 
-This API required PHP version `8.1` and MySQL version `5.6`.
+This API required PHP version `8.1`, Apache `2.4` and
+MySQL version `5.6`.
 
 ---
 
@@ -24,5 +25,15 @@ like this:
     DB_PORT=""
     DB_CHARSET=""
 
-You can use migration API to get all tables: `users`, `todos`,
-`posts` and `comments`. 
+    CACHE_TIME=""
+    CACHE_FOLDER="'
+    
+    LOG_FOLDER=""
+
+Then you should use `composer install`. After that, start your
+server and follow the path in the browser `[domain]/api/v1/users`.
+
+Recommend use OpenServer, WampServer or something like this.
+
+Use Postman for your requests.
+
